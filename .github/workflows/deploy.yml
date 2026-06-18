@@ -25,16 +25,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: npm
-
-      - name: Pin npm to stable v10
-        run: npm install -g npm@10 && npm --version
+          cache: yarn
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund --legacy-peer-deps
+        run: yarn install --non-interactive
 
       - name: Build
-        run: npm run build
+        run: yarn build
         env:
           VITE_BASE: /era-of-agentic-ai/
 
