@@ -6,7 +6,9 @@ import { defineConfig, type PluginOption } from "vite"
 // it is installed, but don't let a missing/partial install block the dev server.
 async function optionalInspectPlugin(): Promise<PluginOption[]> {
   try {
-    const mod = await import('kimi-plugin-inspect-react')
+    // Dynamic import cast to string so TS skips module resolution for this
+    // optional dev-only package which may not be installed.
+    const mod = await import(/* @vite-ignore */ 'kimi-plugin-inspect-react' as string)
     return [mod.inspectAttr()]
   } catch {
     return []
