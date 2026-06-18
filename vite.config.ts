@@ -14,8 +14,11 @@ async function optionalInspectPlugin(): Promise<PluginOption[]> {
 }
 
 // https://vite.dev/config/
+// VITE_BASE is injected by the GitHub Actions deploy workflow so the built
+// assets use the correct sub-path (/era-of-agentic-ai/) on GitHub Pages.
+// Falls back to './' for local development.
 export default defineConfig(async () => ({
-  base: './',
+  base: process.env.VITE_BASE ?? './',
   plugins: [...(await optionalInspectPlugin()), react()],
   server: {
     port: 3000,
