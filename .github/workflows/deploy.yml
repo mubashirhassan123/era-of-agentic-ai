@@ -25,10 +25,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: yarn
 
       - name: Install dependencies
-        run: yarn install --non-interactive
+        run: yarn install --non-interactive --no-lockfile
 
       - name: Build
         run: yarn build
